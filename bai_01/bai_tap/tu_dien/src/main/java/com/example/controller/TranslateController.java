@@ -20,7 +20,7 @@ public class TranslateController {
     @GetMapping(value = "/translate")
     public String translate(@RequestParam String text, Model model) {
         String result = this.iTranslateService.findAll().get(text);
-        
+
         model.addAttribute("result", result);
         model.addAttribute("text", text);
         return "translate";
