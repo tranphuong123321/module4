@@ -60,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../maytinh" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -167,7 +167,10 @@
       <option name="presentableId" value="Default" />
       <updated>1651634554316</updated>
       <workItem from="1651634556890" duration="1025000" />
-      <workItem from="1651635787432" duration="6759000" />
+      <workItem from="1651635787432" duration="6761000" />
+      <workItem from="1651653075267" duration="763000" />
+      <workItem from="1651655563275" duration="20000" />
+      <workItem from="1651658160007" duration="10000" />
     </task>
     <servers />
   </component>
