@@ -22,7 +22,12 @@ public class ThongtinController {
     @PostMapping(value ="/save")
     public String save(@ModelAttribute Thongtin thongtin, RedirectAttributes redirectAttributes){
         this.iThongtinService.save(thongtin);
-        redirectAttributes.addFlashAttribute("mess", "đã giử tờ khai thành công");
-        return  "redirect:/home";
+        redirectAttributes.addFlashAttribute("mess", "đã gửi tờ khai thành công");
+        return  "redirect:/list";
+    }
+    @GetMapping(value="/list")
+    public String thongtinList(Model model){
+        model.addAttribute("thongtinList", iThongtinService.findAll());
+        return "/list";
     }
 }
