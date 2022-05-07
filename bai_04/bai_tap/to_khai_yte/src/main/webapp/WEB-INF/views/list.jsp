@@ -15,21 +15,56 @@
 <h1>TỜ KHAI Y TẾ</h1>
 <a href="/home">edit</a>
 <c:forEach items="${thongtinList}" var="thongtin">
-${thongtin.hoTen}
-${thongtin.namSinh}
-${thongtin.gioiTinh}
-${thongtin.quocTich}
-${thongtin.chungMinh}
-${thongtin.phuongTien}
-${thongtin.soHieu}
-${thongtin.soGhe}
-${thongtin.ngayKhoiHanh}
-${thongtin.thangKhoiHanh}
-${thongtin.namKhoiHanh}
-${thongtin.ngayKetThuc}
-${thongtin.thangKetThuc}
-${thongtin.namKetThuc}
-${thongtin.thanhPho}
+    <div>
+        Họ và tên:
+            ${thongtin.hoTen}
+    </div>
+    <div>
+        Năm sinh:
+            ${thongtin.namSinh}
+    </div>
+    <div>
+        Giới tính:
+            ${thongtin.gioiTinh}
+    </div>
+    <div>
+        Quốc tịch
+            ${thongtin.quocTich}
+    </div>
+    <div>
+        Số chứng minh nhân dân:
+            ${thongtin.chungMinh}
+    </div>
+    <div>
+        Phương tiện di chuyển
+            ${thongtin.phuongTien}
+    </div>
+    <div>
+        Số hiệu
+            ${thongtin.soHieu}
+    </div>
+    <div>
+        Số ghế:
+            ${thongtin.soGhe}
+    </div>
+    <div>
+        Ngày khởi hành:
+            ${thongtin.ngayKhoiHanh}
+
+            ${thongtin.thangKhoiHanh}
+
+            ${thongtin.namKhoiHanh}
+    </div>
+    <div>
+        Ngày kết thúc:
+            ${thongtin.ngayKetThuc}
+            ${thongtin.thangKetThuc}
+            ${thongtin.namKetThuc}
+    </div>
+    <div>
+        Trong 14 ngày qua anh/chị đã đi đến đâu:
+            ${thongtin.thanhPho}
+    </div>
 </c:forEach>
 </body>
 </html>

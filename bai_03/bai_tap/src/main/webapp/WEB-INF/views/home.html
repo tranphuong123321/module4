@@ -1,0 +1,50 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<h1 style="text-align: center">Danh sach san pham</h1>
+<h5 style="text-align: center"><p th:text="${mess}"></p></h5>
+<div>
+    <h3><a href="/create">Them moi san pham</a></h3>
+    <h3><a href="/search">Tim kiem</a></h3>
+
+</div>
+
+<div>
+    <table border="1" id="example" class="table table-striped table-bordered">
+    <tr>
+
+        <th>id</th>
+        <th>ten san pham</th>
+        <th>gia san pham</th>
+        <th>mo ta</th>
+        <th>nha san xuat</th>
+        <th>chuc nang</th>
+    </tr>
+    <tr th:each="product,state :${productList}">
+        <td  th:text="${state.count}"></td>
+        <td  th:text="${product.productName}"></td>
+        <td  th:text="${product.price}"></td>
+        <td  th:text="${product.status}"></td>
+        <td  th:text="${product.producer}"></td>
+        <td  ><a th:href="@{/edit/{id}(id=${product.id})}">Edit</a>
+            <a th:href="@{/delete/{id}(id=${product.id})}">Delete</a>
+            <a th:href="@{/view/{id}(id=${product.id})}">View</a>
+
+        </td>
+
+
+
+
+
+    </tr>
+    </table>
+</div>
+</body>
+</html>

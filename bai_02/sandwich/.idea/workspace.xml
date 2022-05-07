@@ -60,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../maytinh" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -171,6 +171,7 @@
       <workItem from="1651653075267" duration="763000" />
       <workItem from="1651655563275" duration="20000" />
       <workItem from="1651658160007" duration="10000" />
+      <workItem from="1651810625280" duration="2435000" />
     </task>
     <servers />
   </component>

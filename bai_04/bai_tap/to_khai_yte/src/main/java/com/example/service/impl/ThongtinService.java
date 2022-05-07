@@ -9,15 +9,16 @@ import java.util.List;
 
 @Service
 public class ThongtinService implements IThongtinService {
-    static List<Thongtin> thongtinList =new ArrayList<>();
-    private  static Thongtin thongtin = new Thongtin();
+    static List<Thongtin> thongtinList = new ArrayList<>();
+    private static Thongtin thongtin = new Thongtin();
+
     @Override
     public void save(Thongtin thongtin) {
-thongtinList.add(thongtin);
+        thongtinList.add(thongtin);
     }
 
     @Override
     public List<Thongtin> findAll() {
-       return thongtinList;
+        return thongtinList;
     }
 }

@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tao moi san pham</h1>
+    <form th:action="@{/save}" th:object="${product}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>ten san pham</label>
+            <input type="text" th:field="*{productName}"/>
+        </div>
+        <div>
+            <label>gia san pham</label>
+            <input type="text" th:field="*{price}"/>
+        </div>
+        <div>
+            <label>mo ta</label>
+            <input type="text" th:field="*{status}"/>
+        </div>
+        <div>
+            <label>nha san xuat</label>
+            <input type="text" th:field="*{producer}"/>
+        </div>
+        <input type="submit" value="Create"/>
+    </form>
+</body>
+</html>
