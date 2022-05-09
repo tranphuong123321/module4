@@ -12,9 +12,12 @@
 <h5 style="text-align: center"><p th:text="${mess}"></p></h5>
 <div>
     <h3><a href="/create">Them moi san pham</a></h3>
-    <h3><a href="/search">Tim kiem</a></h3>
 
 </div>
+<form action="/search" method="post">
+    <input type="text" placeholder="Enter Product Name" name="name">
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
 
 <div>
     <table border="1" id="example" class="table table-striped table-bordered">
@@ -36,13 +39,7 @@
         <td  ><a th:href="@{/edit/{id}(id=${product.id})}">Edit</a>
             <a th:href="@{/delete/{id}(id=${product.id})}">Delete</a>
             <a th:href="@{/view/{id}(id=${product.id})}">View</a>
-
         </td>
-
-
-
-
-
     </tr>
     </table>
 </div>

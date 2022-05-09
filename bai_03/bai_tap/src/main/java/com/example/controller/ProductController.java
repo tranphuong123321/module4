@@ -61,20 +61,18 @@ public class ProductController {
         iProductService.delete(product.getId());
         redirectAttributes.addFlashAttribute("mess","da xoa thanh cong");
         return "redirect:/home";
-
     }
     @GetMapping(value = "/view/{id}")
     public String view(@PathVariable int id, Model model){
         model.addAttribute("product",iProductService.findById(id));
-        return "/view";
+        return "view";
     }
-    @GetMapping(value = "/search")
-    public  String search(@RequestParam String name, Model model){
-        List<Product> productList = iProductService.searchByName(name);
-        if(productList.size()==0){
-            model.addAttribute("mess","not exits");
-        }
-        model.addAttribute("productList",productList);
-        return ("/home");
+    @PostMapping(value = "/search")
+    public  String search(@RequestParam("name") String productName, Model model){
+        System.out.println(productName);
+//        List<Product> productList = iProductService.searchByName(name);
+        model.addAttribute("productList",iProductService.searchByName(productName));
+        System.out.println(iProductService.searchByName(productName).toString());
+        return "home";
     }
 }

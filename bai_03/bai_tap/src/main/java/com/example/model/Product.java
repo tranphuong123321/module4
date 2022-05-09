@@ -58,4 +58,15 @@ public class Product {
     public void setProducer(String producer) {
         this.producer = producer;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", producer='" + producer + '\'' +
+                '}';
+    }
 }

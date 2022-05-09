@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Them moi bai hat</h1>
+<form th:action ="@{/save}" th:object ="${song}"  method ="post"   >
+
+    <div>
+        <label>name: </label>
+        <input type="text" th:field="*{name}"/>
+    </div>
+    <div>
+        <label>artist: </label>
+        <input type="text" th:field="*{artist}"/>
+    </div>
+    <div>
+        <label>category: </label>
+        <input type="text" th:field="*{category}"/>
+    </div>
+    <div>
+        <label>link: </label>
+        <input type="text" th:field="*{link}"/>
+    </div>
+    <div>
+        <input type="submit" value="create"/>
+    </div>
+</form>
+</body>
+</html>
