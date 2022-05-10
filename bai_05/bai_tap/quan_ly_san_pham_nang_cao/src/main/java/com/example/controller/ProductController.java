@@ -69,9 +69,9 @@ return "redirect:/home";
     @PostMapping(value = "/search")
     public  String search(@RequestParam("name") String productName, Model model){
         System.out.println(productName);
-//        List<Product> productList = iProductService.searchByName(name);
+
         model.addAttribute("productList",iProductService.searchByName(productName));
         System.out.println(iProductService.searchByName(productName).toString());
-        return "home";
+        return "/home";
     }
 }
