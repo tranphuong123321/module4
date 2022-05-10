@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 public class BlogController {
     @Autowired
@@ -24,6 +27,7 @@ public class BlogController {
 
     @GetMapping(value = "/create")
     public String create(Model model, Blog blog) {
+        blog.setDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
         model.addAttribute("blog", blog);
         return "/create";
 
