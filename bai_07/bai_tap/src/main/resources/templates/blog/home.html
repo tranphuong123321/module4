@@ -10,10 +10,11 @@
 <h1 style="text-align: center"><a href="/home">Danh sach blog</a></h1>
 <h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
 <div>
-    <h3><a href="/create">Them moi blog</a></h3>
+    <h3><a href="/blog/create">Them moi blog</a></h3>
+    <h3><a href="/category/home">Quan ly danh muc</a></h3>
 
 </div>
-<form action="/home" method="get">
+<form action="/blog/home" method="get">
     <input type="text" placeholder="Enter Blog Name" name="keyword">
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
@@ -25,6 +26,7 @@
             <th>ten blog</th>
             <th>link</th>
             <th>ngay up</th>
+            <th>danh muc</th>
             <th>chuc nang</th>
         </tr>
         <tr th:each="blog,state :${blogList}">
@@ -33,9 +35,11 @@
             <td  th:text="${blog.name}"></td>
             <td> <a th:href="${blog.link}"><span th:text="${blog.link}"></span></a></td>
             <td  th:text="${blog.day}"></td>
+            <td  th:text="${blog.category.name}"></td>
+
             <td>
-                <a th:href="@{/edit/{id}(id=${blog.id})}">Edit</a>
-                <a th:href="@{/delete/{id}(id=${blog.id})}">Delete</a>
+                <a th:href="@{/blog/edit/{id}(id=${blog.id})}">Edit</a>
+                <a th:href="@{/blog/delete/{id}(id=${blog.id})}">Delete</a>
             </td>
         </tr>
     </table>
@@ -43,14 +47,14 @@
 
     <div>
         <a th:if="${blogList.hasPrevious()}"
-        th:href="@{/home(page=${blogList.number -1}, keyword=${keywordVal})}">
+        th:href="@{/blog/home(page=${blogList.number -1}, keyword=${keywordVal})}">
             Previous
         </a>
         <span th:text="${blogList.number+1}"></span>
         /
         <span th:text="${blogList.totalPages}"></span>
         <a th:if="${blogList.hasNext()}"
-           th:href="@{/home(page=${blogList.number +1}, keyword=${keywordVal})}">
+           th:href="@{/blog/home(page=${blogList.number +1}, keyword=${keywordVal})}">
             Next
         </a>
     </div>

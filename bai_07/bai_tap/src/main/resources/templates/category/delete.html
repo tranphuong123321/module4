@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Xoa danh muc</h1>
+<form th:action="@{/category/delete}" th:object="${category}"
+      method="post" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label>ten danh muc</label>
+        <input type="text" th:field="*{name}"/>
+    </div>
+
+
+    <input type="submit" value="delete"/>
+</form>
+</body>
+</html>

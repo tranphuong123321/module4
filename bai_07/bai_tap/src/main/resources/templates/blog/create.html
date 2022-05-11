@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tao moi blog</h1>
+<form th:action="@{/blog/save}" th:object="${blog}"
+      method="POST" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label>ten blog</label>
+        <input type="text" th:field="*{name}"/>
+    </div>
+    <div>
+        <label>link</label>
+        <input type="text" th:field="*{link}"/>
+    </div>
+    <div>
+        <input type="hidden" th:field="*{day}"/>
+    </div>
+    <div>
+        <label>danh muc</label>
+        <select th:field="*{category}">
+            <option th:each="category:${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+        </select>
+    </div>
+    <input type="submit" value="Create"/>
+</form>
+</body>
+</html>
