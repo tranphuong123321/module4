@@ -23,12 +23,13 @@ public class BlogController {
 
     @Autowired
     private ICategoryService iCategoryService;
+
     @GetMapping(value = "/home")
     public String home(Model model,
-                       @PageableDefault(value = 2)Pageable pageable,
-                       @RequestParam Optional<String > keyword)  {
-        String keywordVal=keyword.orElse("");
-        model.addAttribute("blogList", iBlogService.findAllByNameContaining(keywordVal,pageable));
+                       @PageableDefault(value = 2) Pageable pageable,
+                       @RequestParam Optional<String> keyword) {
+        String keywordVal = keyword.orElse("");
+        model.addAttribute("blogList", iBlogService.findAllByNameContaining(keywordVal, pageable));
         return "/blog/home";
     }
 
@@ -56,7 +57,7 @@ public class BlogController {
     @PostMapping(value = "/update")
     public String update(Blog blog, RedirectAttributes redirectAttributes) {
         iBlogService.update(blog.getId(), blog);
-        redirectAttributes.addFlashAttribute("mess","da chinh sua thanh cong");
+        redirectAttributes.addFlashAttribute("mess", "da chinh sua thanh cong");
         return "redirect:/blog/home";
     }
 
@@ -65,10 +66,11 @@ public class BlogController {
         model.addAttribute("blog", iBlogService.findById(id));
         return "/blog/delete";
     }
+
     @PostMapping(value = "/delete")
-    public String delete(Blog blog, RedirectAttributes redirectAttributes){
+    public String delete(Blog blog, RedirectAttributes redirectAttributes) {
         iBlogService.remove(blog.getId());
-        redirectAttributes.addFlashAttribute("mess","da xoa thanh cong");
+        redirectAttributes.addFlashAttribute("mess", "da xoa thanh cong");
         return "redirect:/blog/home";
     }
 //    @GetMapping (value = "/search")

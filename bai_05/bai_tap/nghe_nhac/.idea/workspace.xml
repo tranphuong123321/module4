@@ -62,7 +62,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../quan_ly_san_pham_nang_cao" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -171,6 +171,7 @@
       <updated>1652068609226</updated>
       <workItem from="1652068611601" duration="3580000" />
       <workItem from="1652072247634" duration="14925000" />
+      <workItem from="1652340116315" duration="70000" />
     </task>
     <servers />
   </component>

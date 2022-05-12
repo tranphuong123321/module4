@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1 style="text-align: center"><a href="/category/home">Quan ly danh muc</a></h1>
-<h1 ><a href="/blog/home">Quay lai danh sach blog</a></h1>
+<h3><a href="/blog/home">Quay lai danh sach blog</a></h3>
 <h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
 <div>
     <h3><a href="/category/create">Them moi danh muc</a></h3>
@@ -26,7 +26,6 @@
             <th>id</th>
             <th>ten danh muc</th>
             <th>chuc nang</th>
-
         </tr>
         <tr th:each="category,state :${categoryList}">
             <td  th:text="${state.count}"></td>
