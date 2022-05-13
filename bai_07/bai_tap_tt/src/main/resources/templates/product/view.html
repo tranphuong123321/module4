@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <label>id: </label>
+    <label  th:text="${product.id}"/></label>
+</div>
+<div>
+    <label>ten san pham: </label>
+    <label  th:text="${product.name}"/></label>
+</div>
+<div>
+    <label>gia san pham: </label>
+    <label th:text="${product.price}"/></label>
+</div>
+<div>
+    <label>mo ta: </label>
+    <label th:text="${product.status}"/></label>
+</div>
+<div>
+    <label>nha san xuat: </label>
+    <label th:text="${product.producer}"/></label>
+</div>
+</body>
+</html>
