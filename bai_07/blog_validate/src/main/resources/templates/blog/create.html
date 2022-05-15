@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tao moi blog</h1>
+<form th:action="@{/blog/create}" th:object="${blog}"
+      method="POST">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label>ten blog</label>
+        <input type="text" th:field="*{name}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    </div>
+    <div>
+        <label>link</label>
+        <input type="text" th:field="*{link}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>
+    </div>
+    <div>
+        <input type="hidden" th:field="*{day}"/>
+    </div>
+    <div>
+        <label>danh muc</label>
+        <select th:field="*{category}">
+            <option th:each="category:${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+            <p style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+        </select>
+    </div>
+    <input type="submit" value="Create"/>
+</form>
+</body>
+</html>

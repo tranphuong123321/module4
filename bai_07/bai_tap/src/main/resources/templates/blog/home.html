@@ -7,7 +7,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1 style="text-align: center"><a href="/home">Danh sach blog</a></h1>
+<h1 style="text-align: center"><a href="/blog/home">Danh sach blog</a></h1>
 <h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
 <div>
     <h3><a href="/blog/create">Them moi blog</a></h3>
@@ -36,7 +36,6 @@
             <td> <a th:href="${blog.link}"><span th:text="${blog.link}"></span></a></td>
             <td  th:text="${blog.day}"></td>
             <td  th:text="${blog.category.name}"></td>
-
             <td>
                 <a th:href="@{/blog/edit/{id}(id=${blog.id})}">Edit</a>
                 <a th:href="@{/blog/delete/{id}(id=${blog.id})}">Delete</a>

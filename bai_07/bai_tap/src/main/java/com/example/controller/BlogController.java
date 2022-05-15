@@ -1,13 +1,17 @@
 package com.example.controller;
 
+import com.example.dto.BlogDto;
 import com.example.model.Blog;
 import com.example.service.IBlogService;
 import com.example.service.ICategoryService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,15 +38,20 @@ public class BlogController {
     }
 
     @GetMapping(value = "/create")
-    public String create(Model model, Blog blog) {
-        blog.setDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
-        model.addAttribute("blog", blog);
-        model.addAttribute("categoryList", this.iCategoryService.findAll());
+    public String create(Model model, BlogDto blogDto) {
+       blogDto.setDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+        model.addAttribute("blogDto", blogDto);
+       model.addAttribute("categoryList", this.iCategoryService.findAll());
         return "/blog/create";
     }
 
-    @PostMapping(value = "/save")
-    public String create(Blog blog, RedirectAttributes redirectAttributes) {
+    @PostMapping(value = "/create")
+    public String create(@ModelAttribute @Validated BlogDto blogDto, BindingResult bindingResult, Blog blog, RedirectAttributes redirectAttributes) {
+        new BlogDto().validate(blogDto,bindingResult);
+        if(bindingResult.hasFieldErrors()){
+            return "/blog/create";
+        }
+        BeanUtils.copyProperties(blogDto,blog);
         iBlogService.save(blog);
         redirectAttributes.addFlashAttribute("mess", "da tao moi thanh cong");
         return "redirect:/blog/home";
