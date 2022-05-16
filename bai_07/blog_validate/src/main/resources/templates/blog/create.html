@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Tao moi blog</h1>
-<form th:action="@{/blog/create}" th:object="${blog}"
+<form th:action="@{/blog/create}" th:object="${blogDto}"
       method="POST">
     <input type="hidden" th:field="*{id}"/>
     <div>
@@ -17,7 +17,7 @@
     <div>
         <label>link</label>
         <input type="text" th:field="*{link}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>
+<!--        <p style="color: red" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>-->
     </div>
     <div>
         <input type="hidden" th:field="*{day}"/>
@@ -26,7 +26,7 @@
         <label>danh muc</label>
         <select th:field="*{category}">
             <option th:each="category:${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
-            <p style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+<!--            <p style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>-->
         </select>
     </div>
     <input type="submit" value="Create"/>
