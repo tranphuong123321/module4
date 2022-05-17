@@ -8,4 +8,5 @@ public interface IBookService {
     Page<Book> findAllByNameContaining(String name, Pageable pageable);
     void save(Book book);
     Book findById(int id);
+
 }

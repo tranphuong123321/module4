@@ -12,13 +12,14 @@
 <h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
 <div>
     <h3><a href="/book/create">Them moi sach</a></h3>
-
+<h3><a th:href="@{/book/pay}">pay</a></h3>
 
 </div>
 <form action="/book/list" method="get">
     <input type="text" placeholder="Enter Book Name" name="keyword">
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
+
 <div>
     <table border="1" id="example" class="table table-striped table-bordered">
         <tr>
@@ -27,7 +28,7 @@
             <th>name</th>
             <th>quantity</th>
             <th>borrow</th>
-            <th>pay</th>
+
 
         </tr>
         <tr th:each="book,state :${bookList}">
@@ -37,9 +38,6 @@
             <td  th:text="${book.quantity}"></td>
             <td>
                 <a th:href="@{/book/borrow/{id}(id=${book.id})}">borrow</a>
-            </td>
-            <td>
-                <a th:href="@{/book/pay/{id}(id=${book.id})}">pay</a>
             </td>
         </tr>
     </table>

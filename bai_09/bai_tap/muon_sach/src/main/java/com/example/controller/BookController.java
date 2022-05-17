@@ -20,44 +20,62 @@ import java.util.Optional;
 @Controller
 public class BookController {
     @Autowired
-   private IBookService iBookService;
+    private IBookService iBookService;
     @Autowired
     private IBorrowBookService iBorrowBookService;
 
     @GetMapping(value = "/book/list")
-    public String list(Model model, @PageableDefault (value = 2)Pageable pageable, @RequestParam Optional<String> keyword){
-        String keywordVal= keyword.orElse("");
-        model.addAttribute("bookList",iBookService.findAllByNameContaining(keywordVal,pageable));
+    public String list(Model model, @PageableDefault(value = 2) Pageable pageable, @RequestParam Optional<String> keyword) {
+        String keywordVal = keyword.orElse("");
+        model.addAttribute("bookList", iBookService.findAllByNameContaining(keywordVal, pageable));
         return "/book/list";
     }
 
     @GetMapping(value = "/book/create")
-    public String create(Model model, Book book){
+    public String create(Model model, Book book) {
 
-        model.addAttribute("book",book);
+        model.addAttribute("book", book);
         return "/book/create";
     }
+
     @PostMapping(value = "/book/create")
-    public String create(Book book, RedirectAttributes redirectAttributes){
+    public String create(Book book, RedirectAttributes redirectAttributes) {
 
         iBookService.save(book);
-        redirectAttributes.addFlashAttribute("mess","da them moi thanh cong");
+        redirectAttributes.addFlashAttribute("mess", "da them moi thanh cong");
         return "redirect:/book/list";
     }
+
     @GetMapping(value = "/book/borrow/{id}")
-    public String borrow(@PathVariable int id, Model model){
-                model.addAttribute("book", iBookService.findById(id));
+    public String borrow(@PathVariable int id, Model model) {
+        model.addAttribute("book", iBookService.findById(id));
         return "/book/borrow";
     }
+
     @PostMapping(value = "/book/borrow")
-    public String borrow(Book book){
+    public String borrow(Book book) {
         Book newBook = this.iBookService.findById(book.getId());
         BorrowBook borrowBook = new BorrowBook();
-        borrowBook.setIdBorrow((int) (Math.random() * 10000));
+        borrowBook.setIdBorrow((int) (Math.random() * 89999) + 10000);
         borrowBook.setBook(newBook);
-        book.setQuantity(book.getQuantity() -1);
+        newBook.setQuantity(newBook.getQuantity() - 1);
         this.iBorrowBookService.save(borrowBook);
+        return "redirect:/book/list";
+    }
 
+    @GetMapping(value = "/book/pay")
+    public String showPay() {
+
+
+        return "/book/pay";
+    }
+
+    @PostMapping(value = "/book/pay")
+    public String pay(@RequestParam Integer pay) {
+
+        BorrowBook borrowBook = iBorrowBookService.findById(pay);
+        borrowBook.getBook().setQuantity(borrowBook.getBook().getQuantity() + 1);
+        this.iBorrowBookService.remove(borrowBook);
         return "redirect:/book/list";
     }
 

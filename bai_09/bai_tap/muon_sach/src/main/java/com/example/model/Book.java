@@ -18,11 +18,10 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer id, String name, Integer quantity, List<BorrowBook> borrowBookList) {
+    public Book(Integer id, String name, Integer quantity) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-        this.borrowBookList = borrowBookList;
     }
 
     public Integer getId() {

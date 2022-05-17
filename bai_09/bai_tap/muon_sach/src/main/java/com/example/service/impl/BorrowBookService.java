@@ -32,4 +32,9 @@ public class BorrowBookService implements IBorrowBookService {
     public BorrowBook findById(int id) {
         return iBorrowBookRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void remove(BorrowBook borrowBook) {
+        iBorrowBookRepository.delete(borrowBook);
+    }
 }

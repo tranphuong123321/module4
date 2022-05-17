@@ -12,4 +12,5 @@ public interface IBorrowBookService {
     void save(BorrowBook borrowBook);
     BorrowBook findById(int id);
 
+    void remove(BorrowBook borrowBook);
 }
