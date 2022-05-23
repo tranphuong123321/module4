@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<h1 style="text-align: center"><a href="/employee/list">Danh sach employee</a></h1>
+<h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
+<div>
+    <h3><a href="/employee/create">Them moi employee</a></h3>
+
+
+</div>
+<form action="/employee/list" method="get">
+    <input type="text" placeholder="Enter  Name" name="keyword">
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+<div>
+    <table border="1" id="example" class="table table-striped table-bordered">
+        <tr>
+            <th>#</th>
+            <th>id</th>
+            <th>name</th>
+            <th>birthDay</th>
+            <th>idCard</th>
+            <th>salary</th>
+            <th>numberPhone</th>
+            <th>email</th>
+            <th>address</th>
+            <th>position</th>
+            <th>educationDegree</th>
+            <th>division</th>
+            <th>funtion</th>
+        </tr>
+        <tr th:each="employee,state :${employeeList}">
+            <td  th:text="${state.count}"></td>
+            <td  th:text="${employee.id}"></td>
+            <td  th:text="${employee.name}"></td>
+            <td  th:text="${employee.birthDay}"></td>
+            <td  th:text="${employee.idCard}"></td>
+            <td  th:text="${employee.salary}"></td>
+            <td  th:text="${employee.numberPhone}"></td>
+            <td  th:text="${employee.email}"></td>
+            <td  th:text="${employee.address}"></td>
+            <td  th:text="${employee.position.name}"></td>
+            <td  th:text="${employee.educationDegree.name}"></td>
+            <td  th:text="${employee.division.name}"></td>
+
+            <td>
+                <a th:href="@{/employee/edit/{id}(id=${employee.id})}">Edit</a>
+                <a th:href="@{/employee/delete/{id}(id=${employee.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+
+    <div>
+        <a th:if="${employeeList.hasPrevious()}"
+           th:href="@{/employee/list(page=${employeeList.number -1}, keyword=${keywordVal})}">
+            Previous
+        </a>
+        <span th:text="${employeeList.number+1}"></span>
+        /
+        <span th:text="${employeeList.totalPages}"></span>
+        <a th:if="${employeeList.hasNext()}"
+           th:href="@{/employee/list(page=${employeeList.number +1}, keyword=${keywordVal})}">
+            Next
+        </a>
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Xoa employee</h1>
+<form th:action="@{/employee/delete}" th:object="${employee}"
+      method="post" >
+    <input type="hidden" th:field="*{id}"/>
+
+
+    <div>
+        <label>name</label>
+        <input type="text" th:field="*{name}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>birthDay</label>
+        <input type="text" th:field="*{birthDay}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>idCard</label>
+        <input type="text" th:field="*{idCard}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>salary</label>
+        <input type="text" th:field="*{salary}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>numberPhone</label>
+        <input type="text" th:field="*{numberPhone}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>email</label>
+        <input type="text" th:field="*{email}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>address</label>
+        <input type="text" th:field="*{address}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>position</label>
+        <input type="text" th:field="*{position}"/>
+    </div>
+    <div>
+        <label>educationDegree</label>
+        <input type="text" th:field="*{educationDegree}"/>
+    </div>
+    <div>
+        <label>division</label>
+        <input type="text" th:field="*{division}"/>
+    </div>
+    <input type="submit" value="delete"/>
+</form>
+</body>
+</html>

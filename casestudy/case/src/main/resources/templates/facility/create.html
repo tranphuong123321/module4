@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tao moi facility</h1>
+<form th:action="@{/facility/create}" th:object="${facility}"
+      method="POST">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <div>
+        <label>name</label>
+        <select th:field="*{name}">
+            <option value="Villa Beach Front" >Villa Beach Front</option>
+            <option value="House Princess 01" >House Princess 01</option>
+            <option  value="Room Twin 01">Room Twin 01</option>
+            <option  value="Villa No Beach Front">Villa No Beach Front</option>
+            <option  value="House Princess 02">House Princess 02</option>
+            <option  value="Room Twin 02">Room Twin 02</option>
+        </select>
+    </div>
+    <div>
+        <label>area</label>
+        <input type="text" th:field="*{area}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>cost</label>
+        <input type="text" th:field="*{cost}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>maxPeople</label>
+        <input type="text" th:field="*{maxPeople}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>standardRoom</label>
+        <select th:field="*{standardRoom}">
+            <option value="Vip" >Vip</option>
+            <option value="Normal" >Normal</option>
+
+        </select>
+    </div>
+    <div>
+        <label>descriptionOtherConvenience</label>
+        <select th:field="*{descriptionOtherConvenience}">
+            <option value="Có hồ bơi" >Có hồ bơi</option>
+            <option value="Có thêm bếp nướng" >Có thêm bếp nướng</option>
+            <option value="Có tivi" >Có tivi</option>
+        </select>
+    </div>
+    <div>
+        <label>poolArea</label>
+        <input type="text" th:field="*{poolArea}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+    <div>
+        <label>numberOfFloors</label>
+        <input type="text" th:field="*{numberOfFloors}"/>
+        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+    </div>
+
+    <div>
+        <label>facilityType</label>
+        <select th:field="*{facilityType}">
+            <option th:each="facilityType:${facilityTypeList}" th:text="${facilityType.name}" th:value="${facilityType.id}"></option>
+        </select>
+    </div>
+    <div>
+        <label>rentType</label>
+        <select th:field="*{rentType}">
+            <option th:each="rentType:${rentTypeList}" th:text="${rentType.name}" th:value="${rentType.id}"></option>
+        </select>
+    </div>
+
+
+
+    <input type="submit" value="Create"/>
+</form>
+</body>
+</html>
