@@ -9,14 +9,20 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String code;
     private String name;
-    private int area;
-    private double cost;
-    private int maxPeople;
+    @Column(columnDefinition = "INT")
+    private String area;
+    @Column(columnDefinition = "DOUBLE")
+    private String cost;
+    @Column(columnDefinition = "INT")
+    private String maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
-    private double poolArea;
-    private int numberOfFloors;
+    @Column(columnDefinition = "DOUBLE")
+    private String poolArea;
+    @Column(columnDefinition = "INT")
+    private String numberOfFloors;
     @OneToMany(mappedBy = "facility")
     private List<Contract> contractList;
     @ManyToOne
@@ -30,8 +36,9 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(int id, String name, int area, double cost, int maxPeople, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, List<Contract> contractList, FacilityType facilityType, RentType rentType) {
+    public Facility(int id, String code, String name, String area, String cost, String maxPeople, String standardRoom, String descriptionOtherConvenience, String poolArea, String numberOfFloors, List<Contract> contractList, FacilityType facilityType, RentType rentType) {
         this.id = id;
+        this.code = code;
         this.name = name;
         this.area = area;
         this.cost = cost;
@@ -53,6 +60,14 @@ public class Facility {
         this.id = id;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getName() {
         return name;
     }
@@ -61,27 +76,27 @@ public class Facility {
         this.name = name;
     }
 
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    public double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public int getMaxPeople() {
+    public String getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(int maxPeople) {
+    public void setMaxPeople(String maxPeople) {
         this.maxPeople = maxPeople;
     }
 
@@ -101,19 +116,19 @@ public class Facility {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public double getPoolArea() {
+    public String getPoolArea() {
         return poolArea;
     }
 
-    public void setPoolArea(double poolArea) {
+    public void setPoolArea(String poolArea) {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public String getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(String numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 

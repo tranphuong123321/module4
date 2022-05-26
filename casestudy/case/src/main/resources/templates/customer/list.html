@@ -24,7 +24,9 @@
 
             <th>#</th>
             <th>id</th>
+            <th>code</th>
             <th>name</th>
+            <th>birthday</th>
             <th>gender</th>
             <th>idCard</th>
             <th>numberPhone</th>
@@ -37,7 +39,9 @@
         <tr th:each="customer,state :${customerList}">
             <td  th:text="${state.count}"></td>
             <td  th:text="${customer.id}"></td>
+            <td  th:text="${customer.code}"></td>
             <td  th:text="${customer.name}"></td>
+            <td  th:text="${customer.birthday}"></td>
             <td  th:text="${customer.gender}"></td>
             <td  th:text="${customer.idCard}"></td>
             <td  th:text="${customer.numberPhone}"></td>

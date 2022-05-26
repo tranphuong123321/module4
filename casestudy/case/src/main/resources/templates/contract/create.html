@@ -10,6 +10,7 @@
       method="POST">
     <input type="hidden" th:field="*{id}"/>
 
+
     <div>
         <label>startDate</label>
         <input type="text" th:field="*{startDate}"/>
@@ -25,6 +26,8 @@
         <input type="text" th:field="*{deposit}"/>
         <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
     </div>
+
+
     <div>
         <label>totalMoney</label>
         <input type="text" th:field="*{totalMoney}"/>
@@ -40,6 +43,12 @@
         <label>facility</label>
         <select th:field="*{facility}">
             <option th:each="facility:${facilityList}" th:text="${facility.name}" th:value="${facility.id}"></option>
+        </select>
+    </div>
+    <div>
+        <label>employee</label>
+        <select th:field="*{employee}">
+            <option th:each="employee:${employeeList}" th:text="${employee.name}" th:value="${employee.id}"></option>
         </select>
     </div>
 

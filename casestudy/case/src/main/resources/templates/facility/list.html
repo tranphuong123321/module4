@@ -31,9 +31,10 @@
             <th>descriptionOtherConvenience</th>
             <th>poolArea</th>
             <th>numberOfFloors</th>
-
             <th>facilityType</th>
             <th>rentType</th>
+            <th>funtion</th>
+
 
 
         </tr>
@@ -52,10 +53,10 @@
             <td  th:text="${facility.facilityType.name}"></td>
             <td  th:text="${facility.rentType.name}"></td>
 
-<!--            <td>-->
-<!--                <a th:href="@{/customer/edit/{id}(id=${customer.id})}">Edit</a>-->
-<!--                <a th:href="@{/customer/delete/{id}(id=${customer.id})}">Delete</a>-->
-<!--            </td>-->
+            <td>
+                <a th:href="@{/facility/edit/{id}(id=${facility.id})}">Edit</a>
+                <a th:href="@{/facility/delete/{id}(id=${facility.id})}">Delete</a>
+            </td>
         </tr>
     </table>
 

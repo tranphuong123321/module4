@@ -24,11 +24,14 @@ private double totalMoney;
 
     @OneToMany(mappedBy = "contract")
     private List<ContractDetail> contractDetailList;
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
 
     public Contract() {
     }
 
-    public Contract(int id, String startDate, String endDate, double deposit, double totalMoney, Customer customer, Facility facility, List<ContractDetail> contractDetailList) {
+    public Contract(int id, String startDate, String endDate, double deposit, double totalMoney, Customer customer, Facility facility, List<ContractDetail> contractDetailList, Employee employee) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -37,6 +40,7 @@ private double totalMoney;
         this.customer = customer;
         this.facility = facility;
         this.contractDetailList = contractDetailList;
+        this.employee = employee;
     }
 
     public int getId() {
@@ -101,5 +105,13 @@ private double totalMoney;
 
     public void setContractDetailList(List<ContractDetail> contractDetailList) {
         this.contractDetailList = contractDetailList;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

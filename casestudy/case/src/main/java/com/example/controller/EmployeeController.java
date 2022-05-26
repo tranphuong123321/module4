@@ -1,19 +1,22 @@
 package com.example.controller;
 
+import com.example.dto.CustomerDto;
+import com.example.dto.EmployeeDto;
+import com.example.model.Customer;
 import com.example.model.Employee;
 import com.example.service.IDivisionService;
 import com.example.service.IEducationDegreeService;
 import com.example.service.IEmployeeService;
 import com.example.service.IPositionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
@@ -38,7 +41,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/employee/create")
     public String create(Model model) {
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeDto", new EmployeeDto());
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("divisionList", iDivisionService.findAll());
         model.addAttribute("educationList", iEducationDegreeService.findAll());
@@ -47,16 +50,28 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee/create")
-    public String create(Employee employee, RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute @Validated EmployeeDto employeeDto,
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
 
-        iEmployeeService.save(employee);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("positionList", iPositionService.findAll());
+            model.addAttribute("divisionList", iDivisionService.findAll());
+            model.addAttribute("educationList", iEducationDegreeService.findAll());
+            return "/employee/create";
+        }
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDto, employee);
+        this.iEmployeeService.save(employee);
         redirectAttributes.addFlashAttribute("mess", "da tao moi thanh cong");
         return "redirect:/employee/list";
     }
 
     @GetMapping(value = "/employee/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
-        model.addAttribute("employee", iEmployeeService.findById(id));
+        EmployeeDto employeeDto = new EmployeeDto();
+        BeanUtils.copyProperties( this.iEmployeeService.findById(id),employeeDto);
+        model.addAttribute("employeeDto",employeeDto);
+//        model.addAttribute("employee", iEmployeeService.findById(id));
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("divisionList", iDivisionService.findAll());
         model.addAttribute("educationList", iEducationDegreeService.findAll());
@@ -65,10 +80,19 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee/update")
-    public String update(Employee employee,RedirectAttributes redirectAttributes) {
-        iEmployeeService.update(employee.getId(),employee);
-        redirectAttributes.addFlashAttribute("mess","da cap nhat thanh cong");
-
+    public String update(RedirectAttributes redirectAttributes,@ModelAttribute @Validated EmployeeDto employeeDto,
+                         BindingResult bindingResult,Model model) {
+        model.addAttribute("positionList", iPositionService.findAll());
+        model.addAttribute("divisionList", iDivisionService.findAll());
+        model.addAttribute("educationList", iEducationDegreeService.findAll());
+//        new EmployeeDto().validate(employeeDto,bindingResult);
+        if(bindingResult.hasFieldErrors()){
+            return "/employee/update";
+        }
+        Employee employee=new Employee();
+        BeanUtils.copyProperties(employeeDto,employee);
+        iEmployeeService.update(employee.getId(), employee);
+        redirectAttributes.addFlashAttribute("mess", "da cap nhat thanh cong");
         return "redirect:/employee/list";
     }
     @GetMapping(value = "/employee/delete/{id}")

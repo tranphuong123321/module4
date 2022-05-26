@@ -1,41 +1,53 @@
-package com.example.model;
+package com.example.dto;
 
-import javax.persistence.*;
-import java.util.List;
+import com.example.model.Division;
+import com.example.model.EducationDegree;
+import com.example.model.Position;
 
-@Entity
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class EmployeeDto {
     private int id;
-
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^KH-\\d{4}$",message = "khong dung dinh dang")
+    private String code;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^\\p{Lu}\\p{Ll}+( \\p{Lu}\\p{Ll}+)*$", message = "ko dung dinh dang")
     private String name;
-    @Column(columnDefinition = "DATE")
+    @NotBlank(message = "khong duoc de trong")
     private String birthDay;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^\\d{9}$", message = "ko dung dinh dang")
     private String idCard;
-    @Column(columnDefinition = "DOUBLE")
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^[+]?\\d*\\.?\\d*$", message = "phai la so duong")
     private String salary;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp =" ^$|^((\\(84\\)\\+(90))|(\\(84\\)\\+(91))|(090)|(091))\\d{7}$", message = "ko dung dinh dang")
     private String numberPhone;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^([a-z]\\w+@[a-z]{2,}\\.)\\w{2,10}(\\.\\w{2,3})?$", message = "ko dung dinh dang")
     private String email;
+    @NotBlank(message = "khong duoc de trong")
     private String address;
-    @ManyToOne
-    @JoinColumn(name = "position_id", referencedColumnName = "id")
-    private Position position;
-    @ManyToOne
-    @JoinColumn(name = "education_degree_id", referencedColumnName = "id")
-    private EducationDegree educationDegree;
-    @ManyToOne
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
-    private Division division;
-    @OneToMany(mappedBy = "employee")
-    private List<Contract> contractList;
 
-    public Employee() {
+    private Position position;
+
+    private EducationDegree educationDegree;
+
+    private Division division;
+
+    public EmployeeDto() {
     }
 
-    public Employee(int id, String name, String birthDay, String idCard, String salary, String numberPhone, String email, String address, Position position, EducationDegree educationDegree, Division division, List<Contract> contractList) {
+    public EmployeeDto(int id, String code, String name, String birthDay, String idCard, String salary, String numberPhone, String email, String address, Position position, EducationDegree educationDegree, Division division) {
         this.id = id;
+        this.code = code;
         this.name = name;
         this.birthDay = birthDay;
         this.idCard = idCard;
@@ -46,7 +58,6 @@ public class Employee {
         this.position = position;
         this.educationDegree = educationDegree;
         this.division = division;
-        this.contractList = contractList;
     }
 
     public int getId() {
@@ -55,6 +66,14 @@ public class Employee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -135,13 +154,5 @@ public class Employee {
 
     public void setDivision(Division division) {
         this.division = division;
-    }
-
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
     }
 }

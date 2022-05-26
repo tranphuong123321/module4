@@ -6,14 +6,14 @@
 </head>
 <body>
 <h1>Chinh sua customer</h1>
-<form th:action="@{/customer/update}" th:object="${customer}"
+<form th:action="@{/customer/update}" th:object="${customerDto}"
       method="post" >
     <input type="hidden" th:field="*{id}"/>
 
     <div>
         <label>name</label>
         <input type="text" th:field="*{name}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
     </div>
     <div>
         <label>gender</label>
@@ -21,29 +21,28 @@
             <option value="Nam" >Nam</option>
             <option value="Nu" >Nu</option>
             <option  value="Khac">Khac</option>
-
         </select>
 
     </div>
     <div>
         <label>idCard</label>
         <input type="text" th:field="*{idCard}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></p>
     </div>
     <div>
         <label>numberPhone</label>
         <input type="text" th:field="*{numberPhone}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}"></p>
     </div>
     <div>
         <label>email</label>
         <input type="text" th:field="*{email}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
     </div>
     <div>
         <label>address</label>
         <input type="text" th:field="*{address}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
     </div>
 
 

@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<h1 style="text-align: center"><a href="/contract/list">Danh sach contract</a></h1>
+<h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
+<div>
+    <h3><a href="/contract/create">Them moi contract</a></h3>
+</div>
 
+
+<div>
+    <table border="1" id="example" class="table table-striped table-bordered">
+        <tr>
+
+            <th>#</th>
+            <th>id</th>
+            <th>startDate</th>
+            <th>endDate</th>
+            <th>deposit</th>
+            <th>totalMoney</th>
+            <th>customer</th>
+            <th>facility</th>
+            <th>employee</th>
+            <th>detail</th>
+
+
+        </tr>
+        <tr th:each="contract,state :${contractList}">
+            <td  th:text="${state.count}"></td>
+            <td  th:text="${contract.id}"></td>
+            <td  th:text="${contract.startDate}"></td>
+            <td  th:text="${contract.endDate}"></td>
+            <td  th:text="${contract.deposit}"></td>
+            <td  th:text="${contract.totalMoney}"></td>
+            <td  th:text="${contract.customer.name}"></td>
+            <td  th:text="${contract.facility.name}"></td>
+            <td  th:text="${contract.employee.name}"></td>
+            <td><a th:href="@{/contractDetail/list/{id}(id=${contract.id})}">detail</a></td>
+
+
+        </tr>
+    </table>
+
+
+    <div>
+        <a th:if="${contractList.hasPrevious()}"
+           th:href="@{/contract/list(page=${contractList.number -1})}">
+            Previous
+        </a>
+        <span th:text="${contractList.number+1}"></span>
+        /
+        <span th:text="${contractList.totalPages}"></span>
+        <a th:if="${contractList.hasNext()}"
+           th:href="@{/contract/list(page=${contractList.number +1})}">
+            Next
+        </a>
+    </div>
+
+
+</div>
 </body>
 </html>

@@ -14,12 +14,12 @@
     <div>
         <label>name</label>
         <select th:field="*{name}">
-            <option value="Villa Beach Front" >Villa Beach Front</option>
-            <option value="House Princess 01" >House Princess 01</option>
-            <option  value="Room Twin 01">Room Twin 01</option>
-            <option  value="Villa No Beach Front">Villa No Beach Front</option>
-            <option  value="House Princess 02">House Princess 02</option>
-            <option  value="Room Twin 02">Room Twin 02</option>
+            <option value="Villa Beach Front">Villa Beach Front</option>
+            <option value="House Princess 01">House Princess 01</option>
+            <option value="Room Twin 01">Room Twin 01</option>
+            <option value="Villa No Beach Front">Villa No Beach Front</option>
+            <option value="House Princess 02">House Princess 02</option>
+            <option value="Room Twin 02">Room Twin 02</option>
         </select>
     </div>
     <div>
@@ -37,37 +37,37 @@
         <input type="text" th:field="*{maxPeople}"/>
         <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
     </div>
-    <div>
+    <div id="standardRoom">
         <label>standardRoom</label>
         <select th:field="*{standardRoom}">
-            <option value="Vip" >Vip</option>
-            <option value="Normal" >Normal</option>
+            <option value="Vip">Vip</option>
+            <option value="Normal">Normal</option>
 
         </select>
     </div>
     <div>
         <label>descriptionOtherConvenience</label>
         <select th:field="*{descriptionOtherConvenience}">
-            <option value="Có hồ bơi" >Có hồ bơi</option>
-            <option value="Có thêm bếp nướng" >Có thêm bếp nướng</option>
-            <option value="Có tivi" >Có tivi</option>
+            <option value="Có hồ bơi">Có hồ bơi</option>
+            <option value="Có thêm bếp nướng">Có thêm bếp nướng</option>
+            <option value="Có tivi">Có tivi</option>
         </select>
     </div>
-    <div>
+    <div id="poolArea">
         <label>poolArea</label>
         <input type="text" th:field="*{poolArea}"/>
         <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
     </div>
-    <div>
+    <div id="numberOfFloors">
         <label>numberOfFloors</label>
         <input type="text" th:field="*{numberOfFloors}"/>
         <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
     </div>
-
     <div>
         <label>facilityType</label>
-        <select th:field="*{facilityType}">
-            <option th:each="facilityType:${facilityTypeList}" th:text="${facilityType.name}" th:value="${facilityType.id}"></option>
+        <select th:field="*{facilityType}" id="facilityType">
+            <option th:each="facilityType:${facilityTypeList}" th:text="${facilityType.name}"
+                    th:value="${facilityType.id}"></option>
         </select>
     </div>
     <div>
@@ -76,10 +76,51 @@
             <option th:each="rentType:${rentTypeList}" th:text="${rentType.name}" th:value="${rentType.id}"></option>
         </select>
     </div>
-
-
-
     <input type="submit" value="Create"/>
 </form>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#facilityType").change(function () {
+            if (this.value == 3){
+
+                $("#standardRoom").hide();
+                $("#standardRoom").find("input").prop("disabled",true);
+
+                $("#numberOfFloors").hide();
+                $("#numberOfFloors").find("input").prop("disabled",true);
+
+                $("#poolArea").hide();
+                $("#poolArea").find("input").prop("disabled",true);
+
+            }else if (this.value==2){
+
+                $("#standardRoom").show();
+                $("#standardRoom").find("input").prop("disabled",false);
+
+                $("#numberOfFloors").show();
+                $("#numberOfFloors").find("input").prop("disabled",false);
+
+                $("#poolArea").hide();
+                $("#poolArea").find("input").prop("disabled",true);
+
+            }else if (this.value==1){
+
+                $("#standardRoom").show();
+                $("#standardRoom").find("input").prop("disabled",false);
+
+                $("#numberOfFloors").show();
+                $("#numberOfFloors").find("input").prop("disabled",false);
+
+                $("#poolArea").show();
+                $("#poolArea").find("input").prop("disabled",false);
+            }
+        })
+    })
+</script>
+
 </body>
 </html>

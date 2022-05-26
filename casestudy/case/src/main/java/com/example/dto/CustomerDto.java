@@ -1,34 +1,46 @@
-package com.example.model;
+package com.example.dto;
 
-import javax.persistence.*;
-import java.util.List;
+import com.example.model.CustomerType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class CustomerDto {
     private int id;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^KH-\\d{4}$",message = "khong dung dinh dang")
     private String code;
+    @NotBlank(message = "khong duoc de trong")
     private String name;
-    @Column(columnDefinition = "DATE")
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$",message = "ko dung dinh dang")
     private String birthday;
+
     private String gender;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^\\d{9}$",message = "ko dung dinh dang")
     private String idCard;
-    private String  numberPhone;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp =" ^$|^((\\(84\\)\\+(90))|(\\(84\\)\\+(91))|(090)|(091))\\d{7}$", message = "ko dung dinh dang")
+    private String numberPhone;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "ko dung dinh dang")
     private String email;
+    @NotEmpty(message = "khong duoc de trong")
     private String address;
-    @ManyToOne
-    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
+
     private CustomerType customerType;
 
-    @OneToMany(mappedBy ="customer")
-    private List<Contract> contractList;
-
-    public Customer() {
+    public CustomerDto() {
     }
 
-    public Customer(int id, String code, String name, String birthday, String gender, String idCard, String numberPhone, String email, String address, CustomerType customerType, List<Contract> contractList) {
+    public CustomerDto(int id, String code, String name, String birthday, String gender, String idCard, String numberPhone, String email, String address, CustomerType customerType) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -39,7 +51,6 @@ public class Customer {
         this.email = email;
         this.address = address;
         this.customerType = customerType;
-        this.contractList = contractList;
     }
 
     public int getId() {
@@ -121,12 +132,5 @@ public class Customer {
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
-
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
 }
+

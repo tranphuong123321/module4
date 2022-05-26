@@ -77,6 +77,5 @@ public class BlogDto implements Validator {
         if(blogDto.getName().equals("")){
             errors.rejectValue("name","string.blank","none");
         }
-
     }
 }
