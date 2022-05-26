@@ -13,9 +13,7 @@ import javax.validation.constraints.Pattern;
 
 public class EmployeeDto {
     private int id;
-    @NotBlank(message = "khong duoc de trong")
-    @Pattern(regexp = "^KH-\\d{4}$",message = "khong dung dinh dang")
-    private String code;
+
     @NotBlank(message = "khong duoc de trong")
     @Pattern(regexp = "^$|^\\p{Lu}\\p{Ll}+( \\p{Lu}\\p{Ll}+)*$", message = "ko dung dinh dang")
     private String name;
@@ -45,9 +43,8 @@ public class EmployeeDto {
     public EmployeeDto() {
     }
 
-    public EmployeeDto(int id, String code, String name, String birthDay, String idCard, String salary, String numberPhone, String email, String address, Position position, EducationDegree educationDegree, Division division) {
+    public EmployeeDto(int id, String name, String birthDay, String idCard, String salary, String numberPhone, String email, String address, Position position, EducationDegree educationDegree, Division division) {
         this.id = id;
-        this.code = code;
         this.name = name;
         this.birthDay = birthDay;
         this.idCard = idCard;
@@ -66,14 +63,6 @@ public class EmployeeDto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {

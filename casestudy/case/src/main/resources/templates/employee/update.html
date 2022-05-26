@@ -8,7 +8,9 @@
 <h1>Chinh sua employee</h1>
 <form th:action="@{/employee/update}" th:object="${employeeDto}"
       method="post" >
+
     <input type="hidden" th:field="*{id}"/>
+
 
 
     <div>

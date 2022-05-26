@@ -1,39 +1,43 @@
-package com.example.model;
+package com.example.dto;
 
-import javax.persistence.*;
+import com.example.model.ContractDetail;
+import com.example.model.Customer;
+import com.example.model.Employee;
+import com.example.model.Facility;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@Entity
-@Table(name = "contract")
-public class Contract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
-private String startDate;
-private String endDate;
-    @Column(columnDefinition = "DOUBLE")
-private String deposit;
-    @Column(columnDefinition = "DOUBLE")
-private String totalMoney;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+public class ContractDto   {
+    private int id;
+    @NotBlank(message = "khong duoc de trong")
+    private String startDate;
+    @NotBlank(message = "khong duoc de trong")
+    private String endDate;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^[+]?\\d*\\.?\\d*$", message = "phai la so duong")
+    private String deposit;
+    @NotBlank(message = "khong duoc de trong")
+    @Pattern(regexp = "^$|^[+]?\\d*\\.?\\d*$", message = "phai la so duong")
+    private String totalMoney;
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "facility_id", referencedColumnName = "id")
     private Facility facility;
-
-    @OneToMany(mappedBy = "contract")
-    private List<ContractDetail> contractDetailList;
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    public Contract() {
+    public ContractDto() {
     }
 
-    public Contract(int id, String startDate, String endDate, String deposit, String totalMoney, Customer customer, Facility facility, List<ContractDetail> contractDetailList, Employee employee) {
+    public ContractDto(int id, String startDate, String endDate, String deposit, String totalMoney, Customer customer, Facility facility, Employee employee) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,7 +45,6 @@ private String totalMoney;
         this.totalMoney = totalMoney;
         this.customer = customer;
         this.facility = facility;
-        this.contractDetailList = contractDetailList;
         this.employee = employee;
     }
 
@@ -101,14 +104,6 @@ private String totalMoney;
         this.facility = facility;
     }
 
-    public List<ContractDetail> getContractDetailList() {
-        return contractDetailList;
-    }
-
-    public void setContractDetailList(List<ContractDetail> contractDetailList) {
-        this.contractDetailList = contractDetailList;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -116,4 +111,7 @@ private String totalMoney;
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+
+
 }

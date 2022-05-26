@@ -10,7 +10,7 @@ public interface ICustomerService {
     Page<Customer> findAllByNameContaining(String name, Pageable pageable);
     void save(Customer customer);
     Customer findById(int id);
-    void update(int id, Customer customer);
+    void update(Customer customer);
     void remove(int id);
     List<Customer> findAll();
 }

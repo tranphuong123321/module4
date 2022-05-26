@@ -30,7 +30,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public void update(int id, Customer customer) {
+    public void update( Customer customer) {
         iCustomerRepository.save(customer);
     }
 

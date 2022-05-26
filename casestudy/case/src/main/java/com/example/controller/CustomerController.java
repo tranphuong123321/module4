@@ -89,7 +89,7 @@ public class CustomerController {
         }
         Customer customer=new Customer();
         BeanUtils.copyProperties(customerDto,customer);
-        iCustomerService.update(customer.getId(), customer);
+        iCustomerService.update( customer);
         redirectAttributes.addFlashAttribute("mess", "da cap nhat thanh cong");
         return "redirect:/customer/list";
     }

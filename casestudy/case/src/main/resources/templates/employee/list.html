@@ -23,7 +23,7 @@
         <tr>
             <th>#</th>
             <th>id</th>
-<!--            <th>code</th>-->
+
 
             <th>name</th>
             <th>birthDay</th>
@@ -40,7 +40,7 @@
         <tr th:each="employee,state :${employeeList}">
             <td  th:text="${state.count}"></td>
             <td  th:text="${employee.id}"></td>
-<!--            <td  th:text="${employee.code}"></td>-->
+
             <td  th:text="${employee.name}"></td>
             <td  th:text="${employee.birthDay}"></td>
             <td  th:text="${employee.idCard}"></td>

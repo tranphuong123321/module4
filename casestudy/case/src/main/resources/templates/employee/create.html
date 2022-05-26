@@ -14,13 +14,7 @@
       method="POST">
     <input type="hidden" th:field="*{id}"/>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="code">code</span>
-        </div>
-        <input type="text" th:field="*{code}"  class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-        <p style="color: red" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></p>
-    </div>
+
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">

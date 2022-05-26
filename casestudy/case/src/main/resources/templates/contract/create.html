@@ -6,32 +6,32 @@
 </head>
 <body>
 <h1>Tao moi contract</h1>
-<form th:action="@{/contract/create}" th:object="${contract}"
+<form th:action="@{/contract/create}" th:object="${contractDto}"
       method="POST">
     <input type="hidden" th:field="*{id}"/>
 
 
     <div>
         <label>startDate</label>
-        <input type="text" th:field="*{startDate}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+        <input type="date" th:field="*{startDate}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p>
     </div>
     <div>
         <label>endDate</label>
-        <input type="text" th:field="*{endDate}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+        <input type="date" th:field="*{endDate}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
     </div>
     <div>
         <label>deposit</label>
         <input type="text" th:field="*{deposit}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></p>
     </div>
 
 
     <div>
         <label>totalMoney</label>
         <input type="text" th:field="*{totalMoney}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('totalMoney')}" th:errors="*{totalMoney}"></p>
     </div>
     <div>
         <label>customer</label>

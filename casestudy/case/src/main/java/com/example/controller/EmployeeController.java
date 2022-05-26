@@ -85,13 +85,13 @@ public class EmployeeController {
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("divisionList", iDivisionService.findAll());
         model.addAttribute("educationList", iEducationDegreeService.findAll());
-//        new EmployeeDto().validate(employeeDto,bindingResult);
+//      new EmployeeDto().validate(employeeDto,bindingResult);
         if(bindingResult.hasFieldErrors()){
             return "/employee/update";
         }
         Employee employee=new Employee();
         BeanUtils.copyProperties(employeeDto,employee);
-        iEmployeeService.update(employee.getId(), employee);
+        iEmployeeService.update( employee);
         redirectAttributes.addFlashAttribute("mess", "da cap nhat thanh cong");
         return "redirect:/employee/list";
     }

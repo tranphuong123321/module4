@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Tao moi facility</h1>
-<form th:action="@{/facility/create}" th:object="${facility}"
+<form th:action="@{/facility/create}" th:object="${facilityDto}"
       method="POST">
 
     <input type="hidden" th:field="*{id}"/>
@@ -25,17 +25,17 @@
     <div>
         <label>area</label>
         <input type="text" th:field="*{area}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></p>
     </div>
     <div>
         <label>cost</label>
         <input type="text" th:field="*{cost}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"></p>
     </div>
     <div>
         <label>maxPeople</label>
         <input type="text" th:field="*{maxPeople}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('maxPeople')}" th:errors="*{maxPeople}"></p>
     </div>
     <div id="standardRoom">
         <label>standardRoom</label>
@@ -56,12 +56,12 @@
     <div id="poolArea">
         <label>poolArea</label>
         <input type="text" th:field="*{poolArea}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></p>
     </div>
     <div id="numberOfFloors">
         <label>numberOfFloors</label>
         <input type="text" th:field="*{numberOfFloors}"/>
-        <!--        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>-->
+                <p style="color: red" th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}"></p>
     </div>
     <div>
         <label>facilityType</label>

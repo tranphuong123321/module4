@@ -30,7 +30,7 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public void update(int id, Employee employee) {
+    public void update( Employee employee) {
         iEmployeeRepository.save(employee);
     }
 

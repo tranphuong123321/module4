@@ -23,6 +23,7 @@
         <tr>
             <th>#</th>
             <th>id</th>
+            <th>code</th>
             <th>name</th>
             <th>area</th>
             <th>cost</th>
@@ -41,6 +42,7 @@
         <tr th:each="facility,state :${facilityList}">
             <td  th:text="${state.count}"></td>
             <td  th:text="${facility.id}"></td>
+            <td  th:text="${facility.code}"></td>
             <td  th:text="${facility.name}"></td>
             <td  th:text="${facility.area}"></td>
             <td  th:text="${facility.rentType.cost}"></td>
