@@ -14,9 +14,21 @@ import java.util.List;
 public class EmployeeService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
+
+
     @Override
-    public Page<Employee> findAllByNameContaining(String name, Pageable pageable) {
-        return iEmployeeRepository.findAllByNameContaining(name,pageable);
+    public Page<Employee> findAllByNameContainingAndEmailContainingAndPosition_Id(String name, String email, String position, Pageable pageable) {
+//        return iEmployeeRepository.f("%" + name + "%", "%" + email + "%",position,pageable);
+        if ("".equals(position)){
+            return this.iEmployeeRepository.findAllByNameContainingAndEmailContaining(name,email,pageable);
+        }else{
+            return this.iEmployeeRepository.findAllByNameContainingAndEmailContainingAndPosition_Id(name,email,Integer.parseInt(position),pageable);
+        }
+    }
+
+    @Override
+    public Page<Employee> findAll(Pageable pageable) {
+        return this.iEmployeeRepository.findAll(pageable);
     }
 
     @Override

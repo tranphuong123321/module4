@@ -14,10 +14,24 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository iCustomerRepository;
+
+
+
+
     @Override
-    public Page<Customer> findAllByNameContaining(String name, Pageable pageable) {
-        return iCustomerRepository.findAllByNameContaining(name,pageable);
+    public Page<Customer> findAllByNameContainingAndEmailContainingAndCustomerType_Id(String name, String email, String customerType, Pageable pageable) {
+        if ("".equals(customerType)){
+            return this.iCustomerRepository.findAllByNameContainingAndEmailContaining(name,email,pageable);
+        }else{
+            return this.iCustomerRepository.findAllByNameContainingAndEmailContainingAndCustomerType_Id(name,email,Integer.parseInt(customerType),pageable);
+        }
     }
+
+    @Override
+    public Page<Customer> findAll(Pageable pageable) {
+        return iCustomerRepository.findAll(pageable);
+    }
+
 
     @Override
     public void save(Customer customer) {

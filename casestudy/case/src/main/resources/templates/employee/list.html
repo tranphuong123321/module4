@@ -7,15 +7,20 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1 style="text-align: center"><a href="/employee/list">Danh sach employee</a></h1>
+<h1 style="text-align: center"><a href="/employee/list">List Employee</a></h1>
 <h5 style="text-align: center" ><p th:text="${mess}"></p></h5>
 <div>
-    <h3><a href="/employee/create">Them moi employee</a></h3>
-
-
+    <h3><a href="/employee/create">Add New Employee</a></h3>
 </div>
 <form action="/employee/list" method="get">
-    <input type="text" placeholder="Enter  Name" name="keyword">
+    <input type="text" placeholder="Enter  Name" name="name">
+    <input type="text" placeholder="Enter  Email" name="email">
+    <div>
+        <select id="position" class="form-select" name="position" >
+            <option value="">--chon--</option>
+            <option th:each="position : ${positionList}" th:value="${position.id}" th:text="${position.name}"></option>
+        </select>
+    </div>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
 <div>
@@ -23,8 +28,6 @@
         <tr>
             <th>#</th>
             <th>id</th>
-
-
             <th>name</th>
             <th>birthDay</th>
             <th>idCard</th>
@@ -62,14 +65,14 @@
 
     <div>
         <a th:if="${employeeList.hasPrevious()}"
-           th:href="@{/employee/list(page=${employeeList.number -1}, keyword=${keywordVal})}">
+           th:href="@{/employee/list(page=${employeeList.number -1}, name=${nameVal},email=${emailVal},position=${positionVal})}">
             Previous
         </a>
         <span th:text="${employeeList.number+1}"></span>
         /
         <span th:text="${employeeList.totalPages}"></span>
         <a th:if="${employeeList.hasNext()}"
-           th:href="@{/employee/list(page=${employeeList.number +1}, keyword=${keywordVal})}">
+           th:href="@{/employee/list(page=${employeeList.number +1}, name=${nameVal},email=${emailVal},position=${positionVal})}">
             Next
         </a>
     </div>

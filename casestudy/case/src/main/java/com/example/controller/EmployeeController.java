@@ -33,10 +33,26 @@ public class EmployeeController {
     private IEducationDegreeService iEducationDegreeService;
 
     @GetMapping(value = "/employee/list")
-    public String showList(Model model, @PageableDefault(value = 2) Pageable pageable, @RequestParam Optional<String> keyword) {
-        String keywordVal = keyword.orElse("");
-        model.addAttribute("employeeList", iEmployeeService.findAllByNameContaining(keywordVal, pageable));
-        return "/employee/list";
+    public String showList(Model model, @PageableDefault(value = 2) Pageable pageable,
+                           @RequestParam Optional<String> name,
+                           @RequestParam Optional<String> email,
+                           @RequestParam Optional<String> position) {
+        model.addAttribute("positionList", iPositionService.findAll());
+        if (name.isPresent() || email.isPresent() || position.isPresent()) {
+            String nameVal = name.orElse("");
+            String emailVal = email.orElse("");
+            String positionVal = position.orElse("");
+            model.addAttribute("nameVal", nameVal);
+            model.addAttribute("emailVal", emailVal);
+            model.addAttribute("positionVal", positionVal);
+            model.addAttribute("employeeList", iEmployeeService.findAllByNameContainingAndEmailContainingAndPosition_Id(nameVal, emailVal, positionVal, pageable));
+            return "/employee/list";
+        } else {
+            model.addAttribute("employeeList",iEmployeeService.findAll(pageable));
+            return "/employee/list";
+        }
+
+
     }
 
     @GetMapping(value = "/employee/create")
@@ -51,7 +67,7 @@ public class EmployeeController {
 
     @PostMapping(value = "/employee/create")
     public String create(@ModelAttribute @Validated EmployeeDto employeeDto,
-                         BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("positionList", iPositionService.findAll());
@@ -69,8 +85,8 @@ public class EmployeeController {
     @GetMapping(value = "/employee/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
         EmployeeDto employeeDto = new EmployeeDto();
-        BeanUtils.copyProperties( this.iEmployeeService.findById(id),employeeDto);
-        model.addAttribute("employeeDto",employeeDto);
+        BeanUtils.copyProperties(this.iEmployeeService.findById(id), employeeDto);
+        model.addAttribute("employeeDto", employeeDto);
 //        model.addAttribute("employee", iEmployeeService.findById(id));
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("divisionList", iDivisionService.findAll());
@@ -80,32 +96,34 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee/update")
-    public String update(RedirectAttributes redirectAttributes,@ModelAttribute @Validated EmployeeDto employeeDto,
-                         BindingResult bindingResult,Model model) {
+    public String update(RedirectAttributes redirectAttributes, @ModelAttribute @Validated EmployeeDto employeeDto,
+                         BindingResult bindingResult, Model model) {
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("divisionList", iDivisionService.findAll());
         model.addAttribute("educationList", iEducationDegreeService.findAll());
 //      new EmployeeDto().validate(employeeDto,bindingResult);
-        if(bindingResult.hasFieldErrors()){
+        if (bindingResult.hasFieldErrors()) {
             return "/employee/update";
         }
-        Employee employee=new Employee();
-        BeanUtils.copyProperties(employeeDto,employee);
-        iEmployeeService.update( employee);
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDto, employee);
+        iEmployeeService.update(employee);
         redirectAttributes.addFlashAttribute("mess", "da cap nhat thanh cong");
         return "redirect:/employee/list";
     }
-    @GetMapping(value = "/employee/delete/{id}")
-    public String delete(@PathVariable int id, Model model){
 
-        model.addAttribute("employee",iEmployeeService.findById(id));
+    @GetMapping(value = "/employee/delete/{id}")
+    public String delete(@PathVariable int id, Model model) {
+
+        model.addAttribute("employee", iEmployeeService.findById(id));
         return "/employee/delete";
     }
+
     @PostMapping(value = "/employee/delete")
-    public String delete( Employee employee,RedirectAttributes redirectAttributes){
+    public String delete(Employee employee, RedirectAttributes redirectAttributes) {
 
         iEmployeeService.remove(employee.getId());
-        redirectAttributes.addFlashAttribute("mess","da xoa thanh cong");
+        redirectAttributes.addFlashAttribute("mess", "da xoa thanh cong");
         return "redirect:/employee/list";
     }
 }

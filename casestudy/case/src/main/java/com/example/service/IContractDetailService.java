@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IContractDetailService {
     Page<ContractDetail> findAll(Pageable pageable);
-    ContractDetail findById(int id);
+    Page<ContractDetail>  findAllByContract_Id(Integer id, Pageable pageable);
 }

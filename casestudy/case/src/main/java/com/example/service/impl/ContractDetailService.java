@@ -20,7 +20,9 @@ public class ContractDetailService implements IContractDetailService {
     }
 
     @Override
-    public ContractDetail findById(int id) {
-        return iContractDetailRepository.findById(id).orElse(null);
+    public Page<ContractDetail> findAllByContract_Id(Integer id ,Pageable pageable) {
+        return iContractDetailRepository.findAllByContract_Id(id,pageable);
     }
+
+
 }

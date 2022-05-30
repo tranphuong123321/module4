@@ -32,32 +32,46 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
     @ModelAttribute("customerTypeList")
-    public List<CustomerType> findAllCustomerType (){
+    public List<CustomerType> findAllCustomerType() {
         return iCustomerTypeService.findAll();
     }
 
     @GetMapping(value = "/customer/list")
-    public String showList(Model model, @PageableDefault(value = 2) Pageable pageable, @RequestParam Optional<String> keyword) {
-        String keywordVal = keyword.orElse("");
-        model.addAttribute("customerList", iCustomerService.findAllByNameContaining(keywordVal, pageable));
-//        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+    public String showList(Model model, @PageableDefault(value = 2) Pageable pageable,
+                           @RequestParam Optional<String> name,
+                           @RequestParam Optional<String> email,
+                           @RequestParam Optional<String> customerType) {
 
-        return "/customer/list";
+        if (name.isPresent() || email.isPresent() || customerType.isPresent()) {
+            String nameVal = name.orElse("");
+            String emailVal = email.orElse("");
+            String customerTypeVal = customerType.orElse("");
+            model.addAttribute("nameVal", nameVal);
+            model.addAttribute("emailVal", emailVal);
+            model.addAttribute("customerTypeVal", customerTypeVal);
+            model.addAttribute("customerList", iCustomerService.findAllByNameContainingAndEmailContainingAndCustomerType_Id(nameVal, emailVal, customerTypeVal, pageable));
+            model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+            return "/customer/list";
+        } else {
+            model.addAttribute("customerList", iCustomerService.findAll(pageable));
+            model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+            return "/customer/list";
+        }
     }
 
     @GetMapping(value = "customer/create")
     public String create(Model model) {
         model.addAttribute("customerDto", new CustomerDto());
-//        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
-
+        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
         return "/customer/create";
     }
 
     @PostMapping(value = "/customer/create")
     public String create(@ModelAttribute @Validated CustomerDto customerDto,
                          BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes
-                       ) {
+                         RedirectAttributes redirectAttributes, Model model
+    ) {
+        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
 //        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
 //            model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
@@ -74,22 +88,20 @@ public class CustomerController {
     public String edit(@PathVariable int id, Model model) {
 
         CustomerDto customerDto = new CustomerDto();
-        BeanUtils.copyProperties( this.iCustomerService.findById(id),customerDto);
-        model.addAttribute("customerDto",customerDto);
-
-
+        BeanUtils.copyProperties(this.iCustomerService.findById(id), customerDto);
+        model.addAttribute("customerDto", customerDto);
         return "/customer/update";
     }
 
     @PostMapping(value = "customer/update")
     public String update(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 //        new CustomerDto().validate(customerDto,bindingResult);
-        if(bindingResult.hasFieldErrors()){
+        if (bindingResult.hasFieldErrors()) {
             return "/customer/update";
         }
-        Customer customer=new Customer();
-        BeanUtils.copyProperties(customerDto,customer);
-        iCustomerService.update( customer);
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
+        iCustomerService.update(customer);
         redirectAttributes.addFlashAttribute("mess", "da cap nhat thanh cong");
         return "redirect:/customer/list";
     }
